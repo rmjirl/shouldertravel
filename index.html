@@ -138,6 +138,27 @@ nav {
 .btn-upsell { background: var(--gold); color: var(--forest); border: none; border-radius: 2rem; padding: 0.45rem 1.1rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
 .btn-upsell:hover { background: var(--gold-light); }
 
+/* BLUR GATE */
+.results-gated { position: relative; margin-top: 0.85rem; }
+.result-card.blurred { filter: blur(5px); pointer-events: none; user-select: none; }
+.blur-gate {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(to bottom, transparent 0%, rgba(22,61,44,0.7) 30%, rgba(13,43,31,0.97) 70%);
+  border-radius: 14px;
+  z-index: 10;
+  padding: 2rem;
+  text-align: center;
+}
+.blur-gate-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+.blur-gate-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+.blur-gate-text { font-size: 0.85rem; color: rgba(255,255,255,0.55); margin-bottom: 1.3rem; max-width: 280px; line-height: 1.6; font-weight: 300; }
+.btn-gate { background: var(--gold); color: var(--forest); border: none; border-radius: 2rem; padding: 0.7rem 1.8rem; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+.btn-gate:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-gate-premium { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
+.btn-gate-premium:hover { background: rgba(200,168,75,0.12); }
+.hdi-footnote { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); font-style: italic; line-height: 1.5; }
+
 /* FEATURES */
 .section-features { padding: 6rem 4rem; }
 .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1100px; margin: 0 auto; }
@@ -350,12 +371,20 @@ footer { background: var(--forest); border-top: 1px solid rgba(255,255,255,0.06)
         <span class="results-title">Top Matches for Your Budget</span>
         <span class="results-count" id="results-count"></span>
       </div>
-      <div class="results-grid" id="results-grid"></div>
-      <div class="upsell-row">
-        <span style="font-size:1.2rem">🔓</span>
-        <span class="upsell-text">Showing your top 10 matches. <strong>Sign up free</strong> to unlock all destinations, save favorites, and access the full travel planner.</span>
-        <button class="btn-upsell">Sign Up Free</button>
+      <div id="results-free" class="results-grid"></div>
+      <div class="results-gated" id="results-gated" style="display:none">
+        <div class="results-grid" id="results-locked"></div>
+        <div class="blur-gate">
+          <div class="blur-gate-icon">🔓</div>
+          <div class="blur-gate-title">See More Destinations</div>
+          <p class="blur-gate-text">Results #4–6 are free with an account. <strong>Premium members ($20/year)</strong> unlock all matches.</p>
+          <div style="display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;">
+            <button class="btn-gate">Sign Up Free</button>
+            <button class="btn-gate btn-gate-premium">Go Premium — $20/yr</button>
+          </div>
+        </div>
       </div>
+      <div class="hdi-footnote">* The Human Development Index (HDI) measures a country's average achievement in health, education, and standard of living on a scale of 0 to 1.</div>
     </div>
   </div>
 </section>
@@ -372,8 +401,8 @@ footer { background: var(--forest); border-top: 1px solid rgba(255,255,255,0.06)
     <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">% Match Score</div><p class="feature-desc">Every destination gets a match score based on your budget, month, climate preferences, and HDI. Top 10 free — see all matches with an account.</p><span class="feature-tag">Free</span></div>
     <div class="feature-card"><div class="feature-icon">🌍</div><div class="feature-title">Country Profiles</div><p class="feature-desc">Deep-dive pages with cost of living, HDI scores, languages spoken, seasonal weather, UGC photos, and fun facts for every destination.</p><span class="feature-tag">Free + Premium</span></div>
     <div class="feature-card"><div class="feature-icon">🗣️</div><div class="feature-title">Language Navigator</div><p class="feature-desc">Know exactly how easy it is to get around based on the languages you speak — shows % of locals who speak each language per country.</p><span class="feature-tag">Free</span></div>
-    <div class="feature-card"><div class="feature-icon">🗓️</div><div class="feature-title">Travel Planner</div><p class="feature-desc">Save destinations and plan up to 3 months of travel free. Premium unlocks 5-year planning with full itinerary tools and exclusive discounts.</p><span class="feature-tag">Premium</span></div>
-    <div class="feature-card"><div class="feature-icon">✨</div><div class="feature-title">Seasonal Fun Facts</div><p class="feature-desc">Hidden gems only available off-peak: regional harvests, celestial events, star viewings, and local festivals. One free, all unlocked for premium.</p><span class="feature-tag">Free + Premium</span></div>
+    <div class="feature-card"><div class="feature-icon">🗓️</div><div class="feature-title">Travel Planner</div><p class="feature-desc">Save destinations and plan up to 1 month of travel free. Premium unlocks 1-year planning with full itinerary tools and exclusive discounts.</p><span class="feature-tag">Free + Premium</span></div>
+    <div class="feature-card"><div class="feature-icon">✨</div><div class="feature-title">Seasonal Travel Insights</div><p class="feature-desc">Hidden gems only available off-peak: regional harvests, celestial events, star viewings, and local festivals. One free, all unlocked for premium.</p><span class="feature-tag">Free + Premium</span></div>
   </div>
 </section>
 
@@ -428,14 +457,15 @@ footer { background: var(--forest); border-top: 1px solid rgba(255,255,255,0.06)
       <div class="pricing-price">$0 <span class="per">/ forever</span></div>
       <div class="pricing-divider"></div>
       <ul class="pricing-features">
-        <li><span class="check">✓</span> Travel calculator (top 10 matches)</li>
+        <li><span class="check">✓</span> Travel calculator (top 3 matches)</li>
         <li><span class="check">✓</span> % Match score</li>
         <li><span class="check">✓</span> Country profiles</li>
         <li><span class="check">✓</span> Language navigator</li>
-        <li><span class="check">✓</span> 1 seasonal fun fact per destination</li>
-        <li class="locked"><span class="check">○</span> Full match list (94% and below)</li>
-        <li class="locked"><span class="check">○</span> 3-month travel planner</li>
-        <li class="locked"><span class="check">○</span> All fun facts unlocked</li>
+        <li><span class="check">✓</span> 1 seasonal travel insight per destination</li>
+        <li><span class="check">✓</span> 1-month travel planner</li>
+        <li class="locked"><span class="check">○</span> Results #4–6 (free account required)</li>
+        <li class="locked"><span class="check">○</span> All seasonal travel insights</li>
+        <li class="locked"><span class="check">○</span> Full match list + 1-year planner</li>
       </ul>
       <button class="btn-plan free-plan">Get Started Free</button>
     </div>
@@ -447,8 +477,8 @@ footer { background: var(--forest); border-top: 1px solid rgba(255,255,255,0.06)
       <ul class="pricing-features">
         <li><span class="check">✓</span> Everything in Free</li>
         <li><span class="check">✓</span> All destination matches</li>
-        <li><span class="check">✓</span> 5-year travel planner</li>
-        <li><span class="check">✓</span> All seasonal fun facts</li>
+        <li><span class="check">✓</span> 1-year travel planner</li>
+        <li><span class="check">✓</span> All seasonal travel insights</li>
         <li><span class="check">✓</span> Individual city guides</li>
         <li><span class="check">✓</span> Exclusive discounts + deals</li>
         <li><span class="check">✓</span> Semi-annual Zine (digital)</li>
@@ -526,21 +556,35 @@ function runCalculator() {
     matchPct: Math.round(99 - (i * (24 / Math.max(matches.length - 1, 1))))
   }));
 
+  document.getElementById('results-free').innerHTML = '';
+  document.getElementById('results-locked').innerHTML = '';
+  document.getElementById('results-gated').style.display = 'none';
   document.getElementById('results-count').textContent = `${top10.length} destinations found`;
-  document.getElementById('results-grid').innerHTML = top10.map((c, i) => `
-    <div class="result-card">
-      <div class="result-rank">#${i + 1}</div>
-      <div class="result-country"><span class="result-flag">${c.flag}</span>${c.name}</div>
-      <div class="result-details">
-        <div class="result-detail"><span>Avg. Rent</span><span>$${c.avgRent}/mo</span></div>
-        <div class="result-detail"><span>HDI Score</span><span>${c.hdi}</span></div>
-        <div class="result-detail"><span>Best Months</span><span>${c.bestMonths.map(m => monthNames[m]).join(', ')}</span></div>
-      </div>
-      <div class="result-hdi-bar"><div class="result-hdi-fill" style="width:${c.hdi * 100}%"></div></div>
-      <div class="result-match">${c.matchPct}% Match</div>
-      ${c.isShoulderMonth ? '<div class="result-shoulder">✦ Shoulder season this month</div>' : ''}
-    </div>
-  `).join('');
+
+  const cardInner = (c, i) => '<div class="result-rank">#' + (i+1) + '</div>' +
+    '<div class="result-country"><span class="result-flag">' + c.flag + '</span>' + c.name + '</div>' +
+    '<div class="result-details">' +
+      '<div class="result-detail"><span>Avg. Rent</span><span>$' + c.avgRent + '/mo</span></div>' +
+      '<div class="result-detail"><span>Human Development Index*</span><span>' + c.hdi + '</span></div>' +
+      '<div class="result-detail"><span>Best Months</span><span>' + c.bestMonths.map(m => monthNames[m]).join(', ') + '</span></div>' +
+    '</div>' +
+    '<div class="result-hdi-bar"><div class="result-hdi-fill" style="width:' + (c.hdi*100) + '%"></div></div>' +
+    '<div class="result-match">' + c.matchPct + '% Match</div>' +
+    (c.isShoulderMonth ? '<div class="result-shoulder">✦ Shoulder season this month</div>' : '');
+
+  // First 3 — fully visible
+  document.getElementById('results-free').innerHTML = top10.slice(0, 3).map((c, i) =>
+    '<div class="result-card">' + cardInner(c, i) + '</div>'
+  ).join('');
+
+  // Remaining — blurred behind gate
+  const locked = top10.slice(3);
+  if (locked.length > 0) {
+    document.getElementById('results-locked').innerHTML = locked.map((c, i) =>
+      '<div class="result-card blurred">' + cardInner(c, i + 3) + '</div>'
+    ).join('');
+    document.getElementById('results-gated').style.display = 'block';
+  }
 
   const resultsEl = document.getElementById('calc-results');
   resultsEl.classList.add('visible');
